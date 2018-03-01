@@ -21,10 +21,11 @@ This package has been created for two reasons:
 
 ## What is Included?
 
-This package includes the following 2 scripts for use in applications:
+This package includes the following 3 scripts for use in applications:
 
 * Prettier - Auto format your code style
 * Husky & Lint Staged - Automatically execute Prettier when running Git commit
+* Jest with Enzyme - Unit test your code
 
 ## Table of Contents
 
@@ -56,7 +57,8 @@ Setup your package.json file with the following:
 {
   "scripts": {
     "format": "app-scripts format",
-    "precommit": "app-scripts precommit"
+    "precommit": "app-scripts precommit",
+    "test": "app-scripts test"
   }
 }
 ```
@@ -88,6 +90,27 @@ While manually formatting code is okay, it can become a pain to do this yourself
 Internally it uses a Git Hook (via the packages [Husky](https://github.com/typicode/husky) and [Lint Staged](https://github.com/okonet/lint-staged)) to check for staged files only and runs the format script on those files.
 
 See [customising](#customising) section for advanced usage.
+
+### Testing
+
+Running `yarn run test` will execute [Jest](https://facebook.github.io/jest/). Included with this is [Enzyme](https://github.com/airbnb/enzyme) along with [Enzyme to JSON](https://github.com/adriantoine/enzyme-to-json) and [Jest Enzyme](https://github.com/FormidableLabs/enzyme-matchers) for your convenience.
+
+This means you can test React components using something like:
+
+```jsx
+import React from 'react';
+
+const Input = (props) => <input {...props} />;
+
+describe('My Component', () => {
+  it('should render an input', () => {
+    const wrapper = shallow(<Input type="text" />);
+
+    expect(wrapper).toMatchSnapshot();
+    expect(wrapper).toHaveProp('type', 'text');
+  });
+});
+````
 
 ## Customising
 
@@ -141,6 +164,32 @@ module.exports = Object.assign(
   {},
 );
 ```
+
+### Jest
+
+To supply your own config file the `test` script will automatically look for any one of the following and use them in place of the built-in config:
+
+* Using the `'--config'` argument, e.g. `yarn run test --config ./file-to-config`
+* jest.config.js in your project root
+* The jest key in your package.json
+
+To extend the config file simply import it and modify it, e.g. create a jest.config.js file with:
+
+```js
+module.exports = Object.assign(
+  require('@viralganatra/app-scripts/configs/jest'),
+  moduleNameMapper: {
+    // Webpack aliases
+  },
+);
+```
+
+In addition the `test` script will use the built-in Babel config. To override this, it will automatically look for and use any one of the following:
+
+* A `.babelrc` in your project root
+* The `babel` key in your package.json
+
+You will have to then configure the Babel test setup yourself. The `test` script sets the NODE_ENV to `test` which will be of use to you. (See the Babel config used in `src/configs/babel/config.js` to get an idea).
 
 ## Compatibility
 
