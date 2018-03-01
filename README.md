@@ -21,11 +21,12 @@ This package has been created for two reasons:
 
 ## What is Included?
 
-This package includes the following 3 scripts for use in applications:
+This package includes the following 4 scripts for use in applications:
 
 * Prettier - Auto format your code style
 * Husky & Lint Staged - Automatically execute Prettier when running Git commit
 * Jest with Enzyme - Unit test your code
+* ESLint - A curated set of rules and guides
 
 ## Table of Contents
 
@@ -33,6 +34,7 @@ This package includes the following 3 scripts for use in applications:
 * [How to use](#how-to-use)
 * [Scripts Explained](#scripts-explained)
 * [Customising](#customising)
+* [IDE Integration](#ide-integration)
 * [Compatibility](#compatibility)
 
 ## Installation
@@ -58,7 +60,8 @@ Setup your package.json file with the following:
   "scripts": {
     "format": "app-scripts format",
     "precommit": "app-scripts precommit",
-    "test": "app-scripts test"
+    "test": "app-scripts test",
+    "lint": "app-scripts lint",
   }
 }
 ```
@@ -111,6 +114,20 @@ describe('My Component', () => {
   });
 });
 ````
+### Linting
+
+Running `yarn run lint` will execute ESLint. The config provided extends from [Airbnb](https://github.com/airbnb/javascript) and includes plugins for [React](https://github.com/airbnb/javascript/tree/master/react), [JSX a11y](https://github.com/evcohen/eslint-plugin-jsx-a11y), [Import](https://github.com/benmosher/eslint-plugin-import), [Prettier](https://github.com/prettier/prettier-eslint), [Jest](https://github.com/jest-community/eslint-plugin-jest) and more.
+
+By default the `node_modules` and `coverage` directories are ignored. Unfortunately there is currently a bug with ESLint processing ignore files, so for now you'll have to include an .eslintignore in your project. For example:
+
+```
+node_modules
+coverage
+```
+
+> Note the config includes an override section for Jest that only applies to files in the format `**/__tests__/*.js`, however because the config is not in the root directory the ESLint parser does not pick this up.
+> Therefore it is recommended to extend the config and place it in your root directory.
+> See [customising](#customising) section for usage.
 
 ## Customising
 
@@ -164,7 +181,6 @@ module.exports = Object.assign(
   {},
 );
 ```
-
 ### Jest
 
 To supply your own config file the `test` script will automatically look for any one of the following and use them in place of the built-in config:
@@ -190,6 +206,42 @@ In addition the `test` script will use the built-in Babel config. To override th
 * The `babel` key in your package.json
 
 You will have to then configure the Babel test setup yourself. The `test` script sets the NODE_ENV to `test` which will be of use to you. (See the Babel config used in `src/configs/babel/config.js` to get an idea).
+
+### ESLint
+
+To supply your own config file the `lint` script will automatically look for any one of the following and use them in place of the built-in config:
+
+* Using the `'--config'` argument, e.g. `yarn run lint --config ./file-to-config`
+* .eslintrc in your project root
+* .eslintrc.js in your project root
+* The eslintConfig key in your package.json
+
+To extend the config file simply import it and modify it, e.g. create a .eslintrc.js file with:
+
+```js
+module.exports = {
+  extends: [require.resolve('@viralganatra/app-scripts/configs/eslint')],
+  rules: {
+    'no-unused-vars': ['warn'],
+  },
+};
+```
+
+In addition you can also supply your own ignore file. The `lint` script will automatically look for any one of the following:
+
+* The `'--ignore-path'` argument, e.g. `yarn run lint --ignore-path ./file-to-ignore-config`
+* .eslintignore in your project root
+* The eslintIgnore key in your package.json
+
+### IDE Integration
+
+Typically, editors such as VSCode look for config files in the root directory of your project. However as the configs are held inside this package you will not get any integration by default. To overcome this, manually create the config in your root directory by exporting the built-in config. For example in the case of linting create an .eslintrc.js file with:
+
+```js
+module.exports = {
+  extends: [require.resolve('@viralganatra/app-scripts/configs/eslint')],
+};
+```
 
 ## Compatibility
 

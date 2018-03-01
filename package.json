@@ -1,6 +1,6 @@
 {
   "name": "@viralganatra/app-scripts",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Common scripts (testing/linting etc) for use in projects",
   "engines": {
     "node": ">= 8",
@@ -15,6 +15,7 @@
   "bin": "./bin/app-scripts.js",
   "dependencies": {
     "babel-core": "^6.26.0",
+    "babel-eslint": "^8.2.2",
     "babel-jest": "^22.4.1",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
@@ -24,6 +25,15 @@
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
     "enzyme-to-json": "^3.3.1",
+    "eslint": "^4.18.1",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-plugin-babel": "^4.1.2",
+    "eslint-plugin-import": "^2.9.0",
+    "eslint-plugin-jest": "^21.12.2",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-prettier": "^2.6.0",
+    "eslint-plugin-react": "^7.7.0",
     "husky": "^0.14.3",
     "is-ci": "^1.1.0",
     "jest": "^22.4.2",
