@@ -21,9 +21,10 @@ This package has been created for two reasons:
 
 ## What is Included?
 
-This package includes the following script for use in applications:
+This package includes the following 2 scripts for use in applications:
 
 * Prettier - Auto format your code style
+* Husky & Lint Staged - Automatically execute Prettier when running Git commit
 
 ## Table of Contents
 
@@ -54,7 +55,8 @@ Setup your package.json file with the following:
 ```json
 {
   "scripts": {
-    "format": "app-scripts format"
+    "format": "app-scripts format",
+    "precommit": "app-scripts precommit"
   }
 }
 ```
@@ -72,6 +74,18 @@ yarn run format
 Running `yarn run format` will execute [Prettier](https://github.com/prettier/prettier) which will auto format your code and ensures it conforms to a consistent style (meaning no more code style discussions 👍).
 
 By default the `node_modules` and `coverage` directories are ignored.
+
+See [customising](#customising) section for advanced usage.
+
+### Auto Formatting Code
+
+While manually formatting code is okay, it can become a pain to do this yourself repeatedly. This script adds the ability to automatically run Prettier whenever you commit code. All you need to do is to add the following to your package.json:
+
+```json
+"precommit": "app-scripts precommit"`
+```
+
+Internally it uses a Git Hook (via the packages [Husky](https://github.com/typicode/husky) and [Lint Staged](https://github.com/okonet/lint-staged)) to check for staged files only and runs the format script on those files.
 
 See [customising](#customising) section for advanced usage.
 
@@ -104,6 +118,29 @@ In addition you can also supply your own ignore file. The `format` script will a
 
 * The `'--ignore-path'` argument, e.g. `yarn run format --ignore-path ./file-to-ignore-config`
 * .prettierignore in your project root
+
+### Lint Staged
+
+To supply your own config file the `precommit` script will automatically look for any one of the following and use them in place of the built-in config:
+
+* Using the `'--config'` argument, e.g.
+
+```json
+"precommit": "app-scripts precommit --config ./file-to-config"
+```
+
+* .lintstagedrc in your project root
+* .lint-staged.config.js in your project root
+* The lint-staged key in your package.json
+
+To extend the config file simply import it and modify it, e.g. create a .lint-staged.config.js file with:
+
+```js
+module.exports = Object.assign(
+  require('@viralganatra/app-scripts/configs/prettier'),
+  {},
+);
+```
 
 ## Compatibility
 
