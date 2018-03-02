@@ -243,6 +243,8 @@ module.exports = {
 };
 ```
 
+Explore the [demo](https://github.com/viralganatra/app-scripts/tree/master/demo) folder to get a better idea.
+
 ## Compatibility
 
 * React and React Dom v16 are peer dependencies (therefore must be installed in your project).
