@@ -9,6 +9,7 @@ module.exports = {
   'rules': {
     'import/no-extraneous-dependencies': ['error', { 'devDependencies': true }],
     'import/prefer-default-export': ['off'],
+    'lines-between-class-members': ['error', 'always', { 'exceptAfterSingleLine': true }],
 
     'react/no-unused-prop-types': ['error', { 'skipShapeProps': true }],
     'react/require-default-props': ['warn'],
