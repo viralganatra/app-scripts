@@ -21,6 +21,7 @@ module.exports = {
     'react/sort-comp': ['error', {
       'order': [
         'static-methods',
+        'instance-variables',
         'lifecycle',
         '/^on.+$/',
         'everything-else',
