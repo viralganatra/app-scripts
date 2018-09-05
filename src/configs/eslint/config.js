@@ -9,8 +9,12 @@ module.exports = {
   'rules': {
     'import/no-extraneous-dependencies': ['error', { 'devDependencies': true }],
     'import/prefer-default-export': ['off'],
-    'lines-between-class-members': ['error', 'always', { 'exceptAfterSingleLine': true }],
 
+    'lines-between-class-members': ['error', 'always', { 'exceptAfterSingleLine': true }],
+    'no-unused-expressions': ['error', { allowShortCircuit: true }],
+
+    'react/destructuring-assignment': ['off'],
+    'react/no-did-update-set-state': ['warn'],
     'react/no-unused-prop-types': ['error', { 'skipShapeProps': true }],
     'react/require-default-props': ['warn'],
     'react/no-array-index-key': ['warn'],
@@ -30,6 +34,8 @@ module.exports = {
         'render',
       ],
     }],
+
+    'jsx-a11y/label-has-for': ['off'],
 
     'prettier/prettier': ['error', prettier],
   },
