@@ -25,7 +25,7 @@ This package includes the following 4 scripts for use in applications:
 
 * Prettier - Auto format your code style
 * Husky & Lint Staged - Automatically execute Prettier when running Git commit
-* Jest with Enzyme - Unit test your code
+* React Testing Library - Test your code
 * ESLint - A curated set of rules and guides
 
 ## Table of Contents
@@ -48,7 +48,7 @@ yarn add --dev @viralganatra/app-scripts
 or `NPM`
 
 ```
-npm install --save-dev @viralganatra/app-scripts
+npm i --save-dev @viralganatra/app-scripts
 ```
 
 ## How to use
@@ -96,21 +96,21 @@ See [customising](#customising) section for advanced usage.
 
 ### Testing
 
-Running `yarn run test` will execute [Jest](https://facebook.github.io/jest/). Included with this is [Enzyme](https://github.com/airbnb/enzyme) along with [Enzyme to JSON](https://github.com/adriantoine/enzyme-to-json) and [Jest Enzyme](https://github.com/FormidableLabs/enzyme-matchers) for your convenience.
+Running `yarn run test` will execute [Jest](https://facebook.github.io/jest/). Included with this is [React Testing Library](https://testing-library.com/docs/react-testing-library/intro) along with [Jest Extended](https://github.com/jest-community/jest-extended), [Jest Fetch Mock](https://github.com/jefflau/jest-fetch-mock) [Jest Dom](https://github.com/testing-library/jest-dom) and [Snapshot Diff](https://github.com/jest-community/snapshot-diff) for your convenience.
 
 This means you can test React components using something like:
 
 ```jsx
 import React from 'react';
+import { render } from '@viralganatra/app-scripts/react-testing-library';
 
-const Input = (props) => <input {...props} />;
+const Input = (props) => <input {...props} data-testid="input" />;
 
 describe('My Component', () => {
   it('should render an input', () => {
-    const wrapper = shallow(<Input type="text" />);
+    const { getByTestId } = render(<Input />);
 
-    expect(wrapper).toMatchSnapshot();
-    expect(wrapper).toHaveProp('type', 'text');
+    expect(getByTestId('input')).toBeDefined();
   });
 });
 ````
@@ -131,7 +131,7 @@ coverage
 
 ## Customising
 
-All scripts have the ability for the config used to be modified, you can either specify your own config or extend the provided config. You can also pass any cli arguments and these will be passed onto the relevant script.
+Most scripts have the ability for the config used to be modified, you can either specify your own config or extend the provided config. You can also pass any cli arguments and these will be passed onto the relevant script.
 
 ### Prettier
 
