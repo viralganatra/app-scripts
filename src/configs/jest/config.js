@@ -12,8 +12,12 @@ const jestConfig = {
   },
   rootDir: fromRoot('src'),
   setupFiles: here('./setup.js'),
-  setupFilesAfterEnv: ['jest-extended',],
-  snapshotSerializers: ['enzyme-to-json/serializer'],
+  setupFilesAfterEnv: [
+    '@testing-library/react/cleanup-after-each',
+    'jest-dom/extend-expect',
+    'jest-extended',
+  ],
+  snapshotSerializers: ['snapshot-diff/serializer.js'],
   testURL: 'http://localhost',
 };
 

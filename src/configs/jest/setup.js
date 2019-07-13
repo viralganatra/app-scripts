@@ -1,14 +1,6 @@
-require('jest-enzyme/lib');
+global.snapshotDiff = require('snapshot-diff');
+global.fetch = require('jest-fetch-mock');
 
-const Enzyme = require('enzyme');
-const Adapter = require('enzyme-adapter-react-16');
-
-Enzyme.configure({ adapter: new Adapter() });
-
-global.shallow = Enzyme.shallow;
-global.render = Enzyme.render;
-global.mount = Enzyme.mount;
-
-console.error = (error) => {
-  throw new Error(error);
+console.error = (err) => {
+  throw new Error(err);
 };
