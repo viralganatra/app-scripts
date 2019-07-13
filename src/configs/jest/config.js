@@ -7,9 +7,12 @@ const useBuiltInBabelConfig = !hasFile('.babelrc') && !hasPkgProp('babel');
 
 const jestConfig = {
   coverageDirectory: path.join(fromRoot('src'), '../coverage'),
+  moduleNameMapper: {
+    '^.+\\.(css|less|scss)$': 'identity-obj-proxy',
+  },
   rootDir: fromRoot('src'),
-  setupFiles: [here('../enzyme/config.js')],
-  setupTestFrameworkScriptFile: here('./setup.js'),
+  setupFiles: here('./setup.js'),
+  setupFilesAfterEnv: ['jest-extended',],
   snapshotSerializers: ['enzyme-to-json/serializer'],
   testURL: 'http://localhost',
 };
