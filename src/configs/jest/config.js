@@ -3,7 +3,7 @@ const { hasFile, hasPkgProp, fromRoot } = require('../../utils');
 
 const here = (p) => path.join(__dirname, p);
 
-const useBuiltInBabelConfig = !hasFile('.babelrc') && !hasPkgProp('babel');
+const useBuiltInBabelConfig = !hasFile('babel.config.js') && !hasFile('.babelrc') && !hasPkgProp('babel');
 
 const jestConfig = {
   coverageDirectory: path.join(fromRoot('src'), '../coverage'),
