@@ -1,6 +1,6 @@
 {
   "name": "@viralganatra/app-scripts",
-  "version": "2.0.2",
+  "version": "3.0.0",
   "description": "Common scripts (testing/linting etc) for use in projects",
   "engines": {
     "node": ">= 8",
