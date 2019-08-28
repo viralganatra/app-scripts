@@ -46,11 +46,15 @@ module.exports = {
     'jsx-a11y/label-has-for': ['off'],
 
     'prettier/prettier': ['error', prettier],
+
+    'react-hooks/rules-of-hooks': 'error',
+    'react-hooks/exhaustive-deps': 'warn',
   },
   'plugins': [
     'babel',
     'react',
     'prettier',
+    'react-hooks',
   ],
   'overrides': [
     {
