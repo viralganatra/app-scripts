@@ -2,7 +2,7 @@ const prettier = require('../prettier/config');
 
 module.exports = {
   'parser': 'babel-eslint',
-  'extends': ['airbnb', 'prettier', 'prettier/react', 'plugin:jest/recommended'],
+  'extends': ['airbnb', 'prettier', 'prettier/react'],
   'env': {
     'browser': true,
     'node': true,
@@ -47,8 +47,11 @@ module.exports = {
 
     'prettier/prettier': ['error', prettier],
 
-    'react-hooks/rules-of-hooks': 'error',
-    'react-hooks/exhaustive-deps': 'warn',
+    'react-hooks/exhaustive-deps': ['warn'],
+    'react-hooks/rules-of-hooks': ['error'],
+    'react/jsx-props-no-spreading': ['off'],
+    'react/state-in-constructor': ['error', 'never'],
+    'react/static-property-placement': ['error', 'static public field'],
   },
   'plugins': [
     'babel',
@@ -58,17 +61,13 @@ module.exports = {
   ],
   'overrides': [
     {
+      'extends': ['plugin:jest/recommended'],
       'files': ['**/__tests__/*.js'],
       'plugins': [
         'jest',
       ],
       'env': {
         'jest': true,
-      },
-      'globals': {
-        'mount': true,
-        'shallow': true,
-        'render': true,
       },
       'rules': {
         'jest/expect-expect': ['error'],
