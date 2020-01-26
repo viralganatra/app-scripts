@@ -3,7 +3,7 @@ const path = require('path');
 const readPkgUp = require('read-pkg-up');
 const which = require('which');
 
-const { package: pkg, path: pkgPath } = readPkgUp.sync({
+const { packageJson: pkg, path: pkgPath } = readPkgUp.sync({
   cwd: fs.realpathSync(process.cwd()),
 });
 
