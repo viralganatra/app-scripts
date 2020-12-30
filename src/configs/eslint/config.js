@@ -2,19 +2,20 @@ const prettier = require('../prettier/config');
 
 module.exports = {
   'parser': 'babel-eslint',
-  'extends': ['airbnb', 'prettier', 'prettier/react'],
+  'extends': ['airbnb', 'prettier', 'prettier/react', 'plugin:react-hooks/recommended'],
   'env': {
     'browser': true,
     'node': true,
   },
   'rules': {
-    'consistent-return': ['error', { treatUndefinedAsUnspecified: true }],    'lines-between-class-members': ['error', 'always', { 'exceptAfterSingleLine': true }],
+    'consistent-return': ['error', { treatUndefinedAsUnspecified: true }],
+    'lines-between-class-members': ['error', 'always', { 'exceptAfterSingleLine': true }],
     'no-empty': ['error', { allowEmptyCatch: true }],
     'no-underscore-dangle': [
       'error',
       { allow: ['__REDUX_DEVTOOLS_EXTENSION__', '__REDUX_DEVTOOLS_EXTENSION_COMPOSE__'] },
     ],
-    'no-unused-expressions': ['error', { allowShortCircuit: true }],
+    '@babel/no-unused-expressions': ['error', { allowShortCircuit: true }],
 
     'import/no-extraneous-dependencies': ['error', { 'devDependencies': true }],
     'import/prefer-default-export': ['off'],
@@ -29,32 +30,13 @@ module.exports = {
     'react/jsx-no-bind': ['error'],
     'react/jsx-one-expression-per-line': ['off'],
 
-    'react/sort-comp': ['error', {
-      'order': [
-        'static-methods',
-        'instance-variables',
-        'lifecycle',
-        '/^on.+$/',
-        'everything-else',
-        '/^(get|set)(?!(InitialState$|DefaultProps$|ChildContext$)).+$/',
-        '/^render.+$/',
-        'render',
-      ],
-    }],
-
     'jsx-a11y/label-has-associated-control': ['error', { assert: 'either' }],
     'jsx-a11y/label-has-for': ['off'],
 
     'prettier/prettier': ['error', prettier],
-
-    'react-hooks/exhaustive-deps': ['warn'],
-    'react-hooks/rules-of-hooks': ['error'],
-    'react/jsx-props-no-spreading': ['off'],
-    'react/state-in-constructor': ['error', 'never'],
-    'react/static-property-placement': ['error', 'static public field'],
   },
   'plugins': [
-    'babel',
+    '@babel',
     'react',
     'prettier',
     'react-hooks',
