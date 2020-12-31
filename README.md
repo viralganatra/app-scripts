@@ -96,7 +96,7 @@ See [customising](#customising) section for advanced usage.
 
 ### Testing
 
-Running `yarn run test` will execute [Jest](https://facebook.github.io/jest/). Included with this is [React Testing Library](https://testing-library.com/docs/react-testing-library/intro) along with [Jest Extended](https://github.com/jest-community/jest-extended), [Jest Fetch Mock](https://github.com/jefflau/jest-fetch-mock) [Jest Dom](https://github.com/testing-library/jest-dom) and [Snapshot Diff](https://github.com/jest-community/snapshot-diff) for your convenience.
+Running `yarn run test` will execute [Jest](https://facebook.github.io/jest/). Included with this is [React Testing Library](https://testing-library.com/docs/react-testing-library/intro) along with [Jest Extended](https://github.com/jest-community/jest-extended), [Jest Dom](https://github.com/testing-library/jest-dom) and [Snapshot Diff](https://github.com/jest-community/snapshot-diff) for your convenience.
 
 This means you can test React components using something like:
 
