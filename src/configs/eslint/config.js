@@ -2,7 +2,7 @@ const prettier = require('../prettier/config');
 
 module.exports = {
   'parser': 'babel-eslint',
-  'extends': ['airbnb', 'prettier', 'prettier/react', 'plugin:react-hooks/recommended'],
+  'extends': ['airbnb', 'plugin:prettier/recommended', 'plugin:react-hooks/recommended'],
   'env': {
     'browser': true,
     'node': true,
@@ -38,7 +38,6 @@ module.exports = {
   'plugins': [
     '@babel',
     'react',
-    'prettier',
     'react-hooks',
   ],
   'overrides': [
