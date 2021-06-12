@@ -11,9 +11,8 @@ const jestConfig = {
     '^.+\\.(css|less|scss)$': 'identity-obj-proxy',
   },
   rootDir: fromRoot('src'),
-  setupFiles: here('./setup.js'),
+  setupFiles: [here('./setup.js')],
   setupFilesAfterEnv: [
-    '@testing-library/react/cleanup-after-each',
     '@testing-library/jest-dom/extend-expect',
     'jest-extended',
   ],
