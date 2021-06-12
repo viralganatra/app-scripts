@@ -1,13 +1,13 @@
 const browserslist = require('browserslist');
 
-const { appDirectory } = require('../../utils')
+const { appDirectory } = require('../../utils');
 
 const IS_TEST_ENV = process.env.NODE_ENV === 'test';
 const IS_PROD_ENV = process.env.NODE_ENV === 'production';
 const IS_DEV_ENV = !IS_TEST_ENV && !IS_PROD_ENV;
 
 const targetBrowsers = browserslist.loadConfig({ path: appDirectory });
-const browsers = targetBrowsers ? { browsers: targetBrowsers } || { esmodules: true };
+const browsers = targetBrowsers ? { browsers: targetBrowsers } : { esmodules: true };
 
 const envTargets = IS_TEST_ENV
   ? { node: 'current' }
